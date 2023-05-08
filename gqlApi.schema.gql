@@ -1,0 +1,33 @@
+
+      input CustomEventInput {
+        id: String!
+        name: String!
+        detail: String!
+        headers: String
+        timestamp: Int!
+      }
+      
+      type Query {
+        customEvent(id: String!): CustomEvent
+        allCustomEvents: [CustomEvent]
+      }
+      
+      type Mutation {
+        createCustomEvent(input: CustomEventInput!): CustomEvent
+        updateCustomEvent(id: String!, input: CustomEventInput!): CustomEvent
+        deleteCustomEvent(id: String!): CustomEvent
+      }
+
+      type Subscription {
+        onCreateCustomEvent(eventFilter: CustomEventInput): CustomEvent
+        @aws_subscribe(mutations:["createCustomEvent"])
+      }
+      
+      type CustomEvent {
+        id: String!
+        name: String!
+        detail: String!
+        headers: String
+        timestamp: Int!
+      }
+    
